@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap');
+
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+@layer base {
+  body {
+    @apply bg-background text-textMain font-sans antialiased overflow-x-hidden;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl;
+  }
+  
+  .neon-text-primary {
+    @apply text-primary;
+    text-shadow: 0 0 5px rgba(255, 42, 42, 0.5), 0 0 15px rgba(255, 42, 42, 0.4);
+  }
+
+  .neon-text-secondary {
+    @apply text-secondary;
+    text-shadow: 0 0 5px rgba(0, 255, 204, 0.5), 0 0 15px rgba(0, 255, 204, 0.4);
+  }
+
+  .glow-border {
+    position: relative;
+  }
+  
+  .glow-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(45deg, rgba(255, 42, 42, 0.8), rgba(0, 255, 204, 0.8), rgba(255, 42, 42, 0.8));
+    background-size: 200% auto;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    animation: borderFlow 3s linear infinite;
+  }
+  
+  .glow-border:hover::before {
+    opacity: 1;
+  }
+
+  @keyframes borderFlow {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+  }
+
+  .crt-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.15;
+  }
+
+  .glitch-text {
+    position: relative;
+    animation: glitch 1.5s infinite;
+  }
+
+  @keyframes glitch {
+    0% {
+      text-shadow: 0.05em 0 0 rgba(255,0,0,0.75), -0.05em -0.025em 0 rgba(0,255,0,0.75), -0.025em 0.05em 0 rgba(0,0,255,0.75);
+    }
+    14% {
+      text-shadow: 0.05em 0 0 rgba(255,0,0,0.75), -0.05em -0.025em 0 rgba(0,255,0,0.75), -0.025em 0.05em 0 rgba(0,0,255,0.75);
+    }
+    15% {
+      text-shadow: -0.05em -0.025em 0 rgba(255,0,0,0.75), 0.025em 0.025em 0 rgba(0,255,0,0.75), -0.05em -0.05em 0 rgba(0,0,255,0.75);
+    }
+    49% {
+      text-shadow: -0.05em -0.025em 0 rgba(255,0,0,0.75), 0.025em 0.025em 0 rgba(0,255,0,0.75), -0.05em -0.05em 0 rgba(0,0,255,0.75);
+    }
+    50% {
+      text-shadow: 0.025em 0.05em 0 rgba(255,0,0,0.75), 0.05em 0 0 rgba(0,255,0,0.75), 0 -0.05em 0 rgba(0,0,255,0.75);
+    }
+    99% {
+      text-shadow: 0.025em 0.05em 0 rgba(255,0,0,0.75), 0.05em 0 0 rgba(0,255,0,0.75), 0 -0.05em 0 rgba(0,0,255,0.75);
+    }
+    100% {
+      text-shadow: -0.025em 0 0 rgba(255,0,0,0.75), -0.025em -0.025em 0 rgba(0,255,0,0.75), -0.025em -0.05em 0 rgba(0,0,255,0.75);
+    }
+  }
+}
